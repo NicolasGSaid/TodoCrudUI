@@ -11,6 +11,9 @@ import { ShowUsuarioComponent } from './usuario/show-usuario/show-usuario.compon
 import { AddEditUsuarioComponent } from './usuario/add-edit-usuario/add-edit-usuario.component';
 import { SharedService } from './shared.service';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,10 @@ import { SharedService } from './shared.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]
