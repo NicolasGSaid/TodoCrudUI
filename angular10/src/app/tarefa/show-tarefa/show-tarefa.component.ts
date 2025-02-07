@@ -8,38 +8,80 @@ import { SharedService } from 'src/app/shared.service';
 })
 export class ShowTarefaComponent implements OnInit {
 
-  constructor(private service:SharedService) { }
+  constructor(private service: SharedService) { }
 
-  TarefaList:any=[];
+  TarefaList: any = [];
 
-  ModalTitle:string;
-  ActivateAddEditTarefaComp:boolean=false;
-  tarefa:any;
+  ModalTitle: string;
+  ActivateAddEditTarefaComp: boolean = false;
+  tarefa: any;
+
+  TarefaIdFilter: string = "";
+  TarefaNomeFilter: string = "";
+  TarefaListWithoutFilter: any = [];
+
   ngOnInit(): void {
     this.refreshTarefaList();
   }
 
-  addClick(){
-    this.tarefa={
-      TarefaId:0,
-      TarefaNome:""
+  addClick() {
+    this.tarefa = {
+      TarefaId: 0,
+      TarefaNome: ""
+    }
+    this.ModalTitle = "Adicionar Tarefa";
+    this.ActivateAddEditTarefaComp = true;
   }
-    this.ModalTitle="Adicionar Tarefa";
-    this.ActivateAddEditTarefaComp=true;
 
-}
+  editClick(item) {
+    this.tarefa = item;
+    this.ModalTitle = "Editar Tarefa";
+    this.ActivateAddEditTarefaComp = true;
+  }
 
- closeClick(){
+  deleteClick(item) {
+    if (confirm('Tem certeza??')) {
+      this.service.deleteTarefa(item.TarefaId).subscribe(data => {
+        alert(data.toString());
+        this.refreshTarefaList();
+      })
+    }
+  }
 
-  this.ActivateAddEditTarefaComp=false;
-  this.refreshTarefaList();
+  closeClick() {
+    this.ActivateAddEditTarefaComp = false;
+    this.refreshTarefaList();
+  }
 
- }
-
-  refreshTarefaList(){
-    this.service.getTarefaList().subscribe(data=>{
-      this.TarefaList=data;
+  refreshTarefaList() {
+    this.service.getTarefaList().subscribe(data => {
+      this.TarefaList = data;
+      this.TarefaListWithoutFilter = data;
     });
+  }
+
+  FilterFn() {
+    var TarefaIdFilter = this.TarefaIdFilter;
+    var TarefaNomeFilter = this.TarefaNomeFilter;
+
+    this.TarefaList = this.TarefaListWithoutFilter.filter(function (el) {
+      return el.TarefaId.toString().toLowerCase().includes(
+        TarefaIdFilter.toString().trim().toLowerCase()
+      ) &&
+        el.TarefaNome.toString().toLowerCase().includes(
+          TarefaNomeFilter.toString().trim().toLowerCase()
+        )
+    });
+  }
+
+  sortResult(prop, asc) {
+    this.TarefaList = this.TarefaListWithoutFilter.sort(function (a, b) {
+      if (asc) {
+        return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+      } else {
+        return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+      }
+    })
   }
 
 }

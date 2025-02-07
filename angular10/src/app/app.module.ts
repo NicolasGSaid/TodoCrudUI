@@ -6,10 +6,8 @@ import { AppComponent } from './app.component';
 import { TarefaComponent } from './tarefa/tarefa.component';
 import { ShowTarefaComponent } from './tarefa/show-tarefa/show-tarefa.component';
 import { AddEditTarefaComponent } from './tarefa/add-edit-tarefa/add-edit-tarefa.component';
-import { UsuarioComponent } from './usuario/usuario.component';
-import { ShowUsuarioComponent } from './usuario/show-usuario/show-usuario.component';
-import { AddEditUsuarioComponent } from './usuario/add-edit-usuario/add-edit-usuario.component';
 import { SharedService } from './shared.service';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,9 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TarefaComponent,
     ShowTarefaComponent,
     AddEditTarefaComponent,
-    UsuarioComponent,
-    ShowUsuarioComponent,
-    AddEditUsuarioComponent
   ],
   imports: [
     BrowserModule,
