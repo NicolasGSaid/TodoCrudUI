@@ -21,9 +21,11 @@ export class AddEditTarefaComponent implements OnInit {
 
   addTarefa() {
     var val = {
-      TarefaId: this.TarefaId,
+      TarefaDescricao: this.TarefaId,
       TarefaNome: this.TarefaNome
     };
+
+    console.log(val)
     this.service.addTarefa(val).subscribe(res => {
       alert(res.toString());
     });

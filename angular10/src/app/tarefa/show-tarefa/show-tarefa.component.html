@@ -81,7 +81,7 @@ data-backdrop="static" data-keyboard="false">
     <tr *ngFor="let dataItem of TarefaList">
         <td>{{dataItem.TarefaId}}</td>
         <td>{{dataItem.TarefaNome}}</td>
-        <td>{{dataItem.Descricao}}</td>
+        <td>{{dataItem.TarefaDescricao}}</td>
         <td class="text-center">
           <input type="checkbox" [(ngModel)]="dataItem.Concluida" (change)="updateTarefa(dataItem)">
         </td>
