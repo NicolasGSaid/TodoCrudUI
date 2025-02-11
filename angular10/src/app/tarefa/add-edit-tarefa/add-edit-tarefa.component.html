@@ -1,3 +1,4 @@
+<!-- Campo para o nome da tarefa -->
 <div class="form-group row">
   <label class="col-sm-2 col-form-label">Nome da tarefa</label>
   <div class="col-sm-10">
@@ -6,6 +7,7 @@
   </div>
 </div>
 
+<!-- Campo para a descrição da tarefa -->
 <div class="form-group row">
   <label class="col-sm-2 col-form-label">Descrição da tarefa</label>
   <div class="col-sm-10">
@@ -14,10 +16,12 @@
   </div>
 </div>
 
+<!-- Botão para adicionar tarefa (visível quando TarefaId é 0) -->
 <button (click)="addTarefa()" *ngIf="TarefaId === 0" class="btn btn-primary">
   Adicionar
 </button>
 
+<!-- Botão para atualizar tarefa (visível quando TarefaId não é 0) -->
 <button (click)="updateTarefa()" *ngIf="TarefaId !== 0" class="btn btn-primary">
   Atualizar
 </button>
