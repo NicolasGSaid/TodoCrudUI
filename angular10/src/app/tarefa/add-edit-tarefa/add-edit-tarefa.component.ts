@@ -25,7 +25,7 @@ export class AddEditTarefaComponent implements OnInit {
     var val = {
       TarefaId: this.TarefaId,
       TarefaNome: this.TarefaNome,
-      TarefaDescricao: this.TarefaDescricao 
+      TarefaDescricao: this.TarefaDescricao, 
     };
 
     console.log(val)
@@ -38,7 +38,7 @@ export class AddEditTarefaComponent implements OnInit {
     var val = {
       TarefaId: this.TarefaId,
       TarefaNome: this.TarefaNome,
-      TarefaDescricao: this.TarefaDescricao
+      TarefaDescricao: this.TarefaDescricao,
     };
     this.service.updateTarefa(val).subscribe(res => {
       alert(res.toString());

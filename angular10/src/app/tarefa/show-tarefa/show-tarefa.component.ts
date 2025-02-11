@@ -39,13 +39,19 @@ export class ShowTarefaComponent implements OnInit {
     this.ActivateAddEditTarefaComp = true;
   }
 
-  deleteClick(item) {
-    if (confirm('Tem certeza??')) {
-      this.service.deleteTarefa(item.TarefaId).subscribe(data => {
-        alert(data.toString());
+  deleteClick(tarefa: { TarefaId: number }) {
+    const id = tarefa.TarefaId;
+    console.log(id);  // Verifique se o id está correto (ex: 7)
+    this.service.deleteTarefa(id).subscribe(
+      res => {
+        alert("Tarefa deletada com sucesso!");
         this.refreshTarefaList();
-      })
-    }
+      },
+      err => {
+        console.error("Erro ao deletar tarefa:", err);
+        alert("Erro ao deletar tarefa. Verifique se ela existe.");
+      }
+    );
   }
 
   closeClick() {
