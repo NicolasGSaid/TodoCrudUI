@@ -11,18 +11,21 @@ export class AddEditTarefaComponent implements OnInit {
   constructor(private service: SharedService) { }
 
   @Input() tarefa: any;
-  TarefaId: string;
   TarefaNome: string;
+  TarefaDescricao: string;
+  TarefaId: string;
 
   ngOnInit(): void {
     this.TarefaId = this.tarefa.TarefaId;
     this.TarefaNome = this.tarefa.TarefaNome;
+    this.TarefaDescricao = this.tarefa.TarefaDescricao;
   }
 
   addTarefa() {
     var val = {
-      TarefaDescricao: this.TarefaId,
-      TarefaNome: this.TarefaNome
+      TarefaId: this.TarefaId,
+      TarefaNome: this.TarefaNome,
+      TarefaDescricao: this.TarefaDescricao 
     };
 
     console.log(val)
@@ -34,7 +37,8 @@ export class AddEditTarefaComponent implements OnInit {
   updateTarefa() {
     var val = {
       TarefaId: this.TarefaId,
-      TarefaNome: this.TarefaNome
+      TarefaNome: this.TarefaNome,
+      TarefaDescricao: this.TarefaDescricao
     };
     this.service.updateTarefa(val).subscribe(res => {
       alert(res.toString());
