@@ -13,12 +13,20 @@ export class AddEditTarefaComponent implements OnInit {
   @Input() tarefa: any;
   TarefaNome: string;
   TarefaDescricao: string;
-  TarefaId: string;
+  TarefaId: number;
 
   ngOnInit(): void {
-    this.TarefaId = this.tarefa.TarefaId;
-    this.TarefaNome = this.tarefa.TarefaNome;
-    this.TarefaDescricao = this.tarefa.TarefaDescricao;
+    console.log('Tarefa passada como Input:', this.tarefa);
+  
+    if (this.tarefa) {
+      this.TarefaId = Number(this.tarefa.TarefaId);  // Garantir que seja um número
+      this.TarefaNome = this.tarefa.TarefaNome || '';
+      this.TarefaDescricao = this.tarefa.TarefaDescricao || '';
+    } else {
+      this.TarefaId = 0;  // Inicializando como número
+      this.TarefaNome = '';
+      this.TarefaDescricao = '';
+    }
   }
 
   addTarefa() {
@@ -27,10 +35,14 @@ export class AddEditTarefaComponent implements OnInit {
       TarefaNome: this.TarefaNome,
       TarefaDescricao: this.TarefaDescricao, 
     };
-
-    console.log(val)
+  
+    console.log(val); // Verifique se os valores estão sendo passados corretamente
+  
     this.service.addTarefa(val).subscribe(res => {
       alert(res.toString());
+    }, error => {
+      console.error("Erro ao adicionar tarefa", error);
+      alert("Falha ao adicionar");
     });
   }
 
